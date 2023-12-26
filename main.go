@@ -7,7 +7,7 @@ import (
 
 func main(){
 	fileLines := getFileInput(os.Args[1])
-	output := GetSumOfCalibrationNumbers(fileLines);
+	output := HowManyGamesPossible(fileLines);
 	println(output)
 }
 
