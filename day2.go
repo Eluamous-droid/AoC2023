@@ -11,39 +11,31 @@ func HowManyGamesPossible(inputData []string) int{
 	sum := 0;
 
 	totalObjects := make(map[string]int)
-	totalObjects["red"] = 12
-	totalObjects["blue"] = 14
-	totalObjects["green"] = 13
 
 	for _,line := range inputData{
 		metadata := strings.Split(line, ":")
-		gameNumber := strings.Split(metadata[0], " ")
 
-		impossibleGame := true 
+		totalObjects["red"] = 0
+		totalObjects["blue"] = 0
+		totalObjects["green"] = 0
 		individualGames := strings.Split(metadata[1], ";")
 		for _,game := range individualGames{
 			println(game)
 			gameValues := getCubesFromGame(game)
 
 			if gameValues["red"] > totalObjects["red"] {
-				impossibleGame = false 
-				break
+				totalObjects["red"] = gameValues["red"]
 			}
 			if gameValues["blue"] > totalObjects["blue"] {
-				impossibleGame = false
-				break
+				totalObjects["blue"] = gameValues["blue"]
 			}
 			if gameValues["green"] > totalObjects["green"] {
-				impossibleGame = false
-				break
+				totalObjects["green"] = gameValues["green"]
 			}
 
 		}
+		sum += totalObjects["red"] * totalObjects["green"] * totalObjects["blue"]
 
-			if impossibleGame{
-				gameValue,_ :=strconv.Atoi(gameNumber[1])
-				sum += gameValue 
-			}
 
 	}
 
