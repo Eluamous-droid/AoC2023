@@ -7,7 +7,7 @@ import (
 
 func main(){
 	fileLines := getFileInput(os.Args[1])
-	output := HowManyGamesPossible(fileLines);
+	output := GetPointsFromScratches(fileLines)
 	println(output)
 }
 
