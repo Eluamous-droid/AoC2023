@@ -8,27 +8,29 @@ import (
 
 func GetPointsFromScratches(lines []string) int {
 
-	sum := 0
-	for _,line := range lines{
+	total := 0
+	copies := make([]int, len(lines))
+	for i,line := range lines{
+		copies[i]++
 
 		meta := strings.Split(line,":")
 		games := strings.Split(meta[1], "|")
 		winningNumbers := getNumbers(games[0])
 		scratchNumbers := getNumbers(games[1])
-		points := 0
+		correctNumbers := 0
 		for _,number := range winningNumbers{
-			println(number)
 			if slices.Contains(scratchNumbers, number){
-				points = multiplyPoints(points)
+				correctNumbers++
+				copies[i+correctNumbers] += copies[i]
 			}
 		}
+		total += copies[i]	
 		
-		println(points)
-		sum += points
 
 	}
-	return sum
+	return total
 }
+
 
 func getNumbers(numbers string) []int{
 	var actualNumbers []int
